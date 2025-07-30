@@ -1,0 +1,61 @@
+@Library('shared-lib') _
+
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "yasmeenkhaled/jenkins-app"
+        TAG = "latest"
+    }
+
+    stages {
+        stage('Build Image') {
+            steps {
+                script {
+                    buildImage(IMAGE_NAME, TAG)
+                }
+            }
+        }
+
+        stage('Scan Image') {
+            steps {
+                script {
+                    scanImage(IMAGE_NAME, TAG)
+                }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                script {
+                    pushImage(IMAGE_NAME, TAG)
+                }
+            }
+        }
+
+        stage('Delete Image Locally') {
+            steps {
+                script {
+                    deleteImage(IMAGE_NAME, TAG)
+                }
+            }
+        }
+
+        stage('Update Manifests') {
+            steps {
+                script {
+                    updateManifests(IMAGE_NAME, TAG)
+                }
+            }
+        }
+
+        stage('Push Manifests') {
+            steps {
+                script {
+                    pushManifests()
+                }
+            }
+        }
+    }
+}
+
