@@ -28,45 +28,87 @@ def index():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 ```
+ * **Source Code:**
+  [FinalProject](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/FinalProject)
 
-## 1- Docker 
+---
+## 🚀 1. Docker – Containerizing the Flask App
 
-Dockerfile builds the Flask app into a container image.
+We use a `Dockerfile` to package the Flask application into a container image.
 
-```
+### 🔧 Build the Docker Image
+
+```bash
 docker build -t flask-app .
+```
 
+### ▶️ Run the Container
+
+```bash
 docker run -p 5000:5000 flask-app
 ```
 
-<img width="986" height="646" alt="image" src="https://github.com/user-attachments/assets/f0d77ea1-a8b8-4ce7-8ccd-fcafffb22b41" />
+> ✅ This exposes the Flask app on [http://localhost:5000](http://localhost:5000)
 
+![Docker Image](https://github.com/user-attachments/assets/f0d77ea1-a8b8-4ce7-8ccd-fcafffb22b41)
 
+---
 
-## 2- K8s 
+## ☸️ 2. Kubernetes – Deploying the App on Minikube
 
-Resources defined in YAML: Deployment, Service, Namespace
+The Kubernetes setup includes the following YAML resources:
 
-Start server 
+* `namespace.yaml`
+* `deployment.yaml`
+* `service.yaml`
+
+### 🚀 Start Minikube
+
+```bash
+minikube start
 ```
- minikube start
-```
-Apply yaml files
-```
+
+### 📦 Apply Kubernetes Manifests
+
+```bash
 kubectl apply -f namespace.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
-````
-Open Port 
 ```
+
+### 🌐 Expose the Service
+
+```bash
 minikube service flask-service -n ivolve
 ```
-<img width="898" height="200" alt="image" src="https://github.com/user-attachments/assets/e7422641-1db3-4447-95bc-5a773aa2517f" />
-<img width="568" height="172" alt="image" src="https://github.com/user-attachments/assets/ffb2779c-2d59-41e3-8c92-474e3e122af8" />
 
-## 3- Terraform 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/57425c5a-4258-4738-a297-3c6b8e27e6d5" />
+> This command opens the exposed service in your browser.
 
-<img width="1023" height="516" alt="image" src="https://github.com/user-attachments/assets/66735df1-5abc-4329-8dcc-f21392fd8b85" />
+![Service Exposed](https://github.com/user-attachments/assets/e7422641-1db3-4447-95bc-5a773aa2517f)
+![Service UI](https://github.com/user-attachments/assets/ffb2779c-2d59-41e3-8c92-474e3e122af8)
 
+---
+
+## 🌍 3. Terraform – Provisioning AWS Infrastructure
+
+Terraform is used to provision backend resources such as:
+
+* S3 bucket for remote state
+* DynamoDB table for state locking (deprecated: use `use_lockfile`)
+* EC2 instance or other infrastructure
+  **Source Code:**
+ **Source Code:**
+- [variables.tf](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/variables.tf)
+- [providers.tf](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/providers.tf)
+- [outputs.tf](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/outputs.tf)
+- [main.tf](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/main.tf)
+- [backend.tf](https://github.com/yasmeenkhaled/cloudDevOpsProjectt/blob/main/backend.tf)
+
+
+### 📷 Infrastructure Provisioning Screenshots:
+
+![Terraform Infra](https://github.com/user-attachments/assets/57425c5a-4258-4738-a297-3c6b8e27e6d5)
+![Terraform Output](https://github.com/user-attachments/assets/66735df1-5abc-4329-8dcc-f21392fd8b85)
+
+---
 
