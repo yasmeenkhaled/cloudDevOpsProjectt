@@ -1,74 +1,64 @@
-# ☁️ Cloud DevOps Project
+# ☁️ Cloud DevOps Project (Terraform Infrastructure Provisioning)
 
-This project demonstrates a complete DevOps lifecycle implementation for deploying a Flask web application on the cloud using the following tools:
-
-- **Git & GitHub** – Source control and collaboration
-- **Docker** – Containerization
-- **Kubernetes (K8s)** – Container orchestration
-- **Terraform** – Infrastructure as Code on AWS
-- **Ansible** – Configuration management
-- **Jenkins** – Continuous Integration (CI)
-- **ArgoCD** – Continuous Deployment (CD)
+This project provisions a basic CI/CD infrastructure on **AWS** using **Terraform** with modular design and remote backend. The setup includes a Jenkins server, VPC networking, security groups, monitoring, and backend state management with S3.
 
 ---
 
-## 📦 Application Overview
+## 🚀 Project Overview
 
-The application is a simple Python Flask web app that renders an HTML page using Jinja templates.
+This project is part of a Cloud DevOps Graduation Program and demonstrates Infrastructure as Code (IaC) best practices using Terraform. It automates the provisioning of:
 
-```python
-from flask import Flask, render_template
+- Virtual Private Cloud (VPC)
+- Public Subnet
+- Internet Gateway (IGW)
+- Network ACLs
+- EC2 instance for Jenkins
+- Security Groups
+- S3 Backend for Terraform State
+- DynamoDB for State Locking
+- CloudWatch Monitoring
 
-app = Flask(__name__)
+---
 
-@app.route("/")
-def index():
-    return render_template("index.html")
+## 📁 Project Structure
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+```bash
+CloudDevOpsProject/
+├── terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── backend.tf
+│   ├── terraform.tfvars
+│   ├── modules/
+│   │   ├── network/
+│   │   │   └── (VPC, subnet, IGW, ACL...)
+│   │   └── server/
+│   │       └── (EC2 instance, SG...)
+│   └── .gitignore
+├── README.md
+└── jenkins-pass.txt (excluded from Git)
 ```
-
-## 1- Docker 
-
-Dockerfile builds the Flask app into a container image.
+## 🌐 Infrastructure Diagram
+```
+          +------------------------+
+          |     Internet Gateway   |
+          +-----------+------------+
+                      |
+              +-------v--------+
+              |    Public Subnet |
+              +--------+--------+
+                       |
+              +--------v--------+
+              |    EC2 (Jenkins) |
+              |  Security Group  |
+              +------------------+
 
 ```
-docker build -t flask-app .
-
-docker run -p 5000:5000 flask-app
-```
-
-<img width="986" height="646" alt="image" src="https://github.com/user-attachments/assets/f0d77ea1-a8b8-4ce7-8ccd-fcafffb22b41" />
-
+## ✅ Prerequisites
+- AWS account with programmatic access
+- Terraform installed locally (v1.8.4)
+- Git
+- SSH key pair for EC2 access
 
 
-## 2- K8s 
-
-Resources defined in YAML: Deployment, Service, Namespace
-
-Start server 
-```
- minikube start
-```
-Apply yaml files
-```
-kubectl apply -f namespace.yaml
-kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
-````
-Open Port 
-```
-minikube service flask-service -n ivolve
-```
-<img width="898" height="200" alt="image" src="https://github.com/user-attachments/assets/e7422641-1db3-4447-95bc-5a773aa2517f" />
-<img width="568" height="172" alt="image" src="https://github.com/user-attachments/assets/ffb2779c-2d59-41e3-8c92-474e3e122af8" />
-
-## 3- Terraform 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/57425c5a-4258-4738-a297-3c6b8e27e6d5" />
-
-<img width="1023" height="516" alt="image" src="https://github.com/user-attachments/assets/66735df1-5abc-4329-8dcc-f21392fd8b85" />
-
-
-# cloudDevOpsProjectt
-# cloudDevOpsProjectt
