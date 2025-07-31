@@ -111,4 +111,6 @@ Terraform is used to provision backend resources such as:
 ![Terraform Output](https://github.com/user-attachments/assets/66735df1-5abc-4329-8dcc-f21392fd8b85)
 
 ---
+### Jenkins / CI/CD pipline 
+<img width="1280" height="604" alt="image" src="https://github.com/user-attachments/assets/00b14de3-e0f0-4d72-b0ca-2efdfeb77135" />
 
