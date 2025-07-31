@@ -117,3 +117,7 @@ Terraform is used to provision backend resources such as:
 
 <img width="1280" height="604" alt="image" src="https://github.com/user-attachments/assets/00b14de3-e0f0-4d72-b0ca-2efdfeb77135" />
 
+
+### ArgoCD 
+<img width="1280" height="604" alt="image" src="https://github.com/user-attachments/assets/cbf6b224-d3ee-4492-9feb-7b1bdfa51f17" />
+
